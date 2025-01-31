@@ -10,12 +10,17 @@ type EventsPageProps = {
   };
 };
 
-export function generateMetadata({ params }: { params: { city: string } }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: { city: string };
+}) {
+  const { city } = await params;
   return {
     title:
-      params.city === "all"
+      city === "all"
         ? "All Events | EVENTO"
-        : `Events in ${capitalize(params.city)} | EVENTO`,
+        : `Events in ${capitalize(city)} | EVENTO`,
   };
 }
 
