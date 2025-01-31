@@ -4,6 +4,12 @@ import Loading from "./loading";
 import EventsListDataWrapper from "@/components/EventsListDataWrapper";
 import { capitalize } from "@/lib/utils";
 
+type EventsPageProps = {
+  params: {
+    city: string;
+  };
+};
+
 export function generateMetadata({ params }: { params: { city: string } }) {
   return {
     title:
@@ -13,11 +19,7 @@ export function generateMetadata({ params }: { params: { city: string } }) {
   };
 }
 
-export default async function EventsPage({
-  params,
-}: {
-  params: { city: string };
-}) {
+export default async function EventsPage({ params }: EventsPageProps) {
   const { city } = await params;
 
   return (
