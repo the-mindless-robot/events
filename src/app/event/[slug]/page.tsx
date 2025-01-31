@@ -1,5 +1,6 @@
 import H1 from "@/components/H1";
 import { TEvent } from "@/lib/types";
+import { Metadata } from "next";
 import Image from "next/image";
 
 type EventPageProps = {
@@ -7,6 +8,23 @@ type EventPageProps = {
     slug: string;
   };
 };
+
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const slug = params.slug;
+
+  const response = await fetch(
+    `https://bytegrad.com/course-assets/projects/evento/api/events/${slug}`
+  );
+  const event: TEvent = await response.json();
+
+  return {
+    title: `${event.name} in ${event.city} | ${event.location} | EVENTO`,
+  };
+}
 
 export default async function EventPage({ params }: EventPageProps) {
   const { slug } = await params;
