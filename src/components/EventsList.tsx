@@ -1,4 +1,4 @@
-import { TEvent } from "@/lib/types";
+import { TEvent } from "@prisma/client";
 import EventCard from "./EventCard";
 
 export default async function EventsList({ events }: { events: TEvent[] }) {

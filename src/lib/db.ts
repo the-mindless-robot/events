@@ -1,4 +1,4 @@
-import { TEvent } from "./types";
+import { TEvent } from "@prisma/client";
 
 export async function getEvent(slug: string): Promise<TEvent> {
   const response = await fetch(
