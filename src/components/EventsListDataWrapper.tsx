@@ -6,9 +6,9 @@ export default async function EventsListDataWrapper({
   page,
 }: {
   city: string;
-  page: string;
+  page: number | undefined;
 }) {
-  const pageNumber = parseInt(page, 10) || 1;
+  const pageNumber = page || 1;
   const { prismaEvents: events, totalCount } = await getEvents(
     city,
     pageNumber
