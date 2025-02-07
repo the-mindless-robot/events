@@ -6,18 +6,18 @@ import { capitalize } from "@/lib/utils";
 import { z } from "zod";
 
 type EventsPageProps = {
-  params: {
+  params: Promise<{
     city: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     page: string;
-  };
+  }>;
 };
 
 export async function generateMetadata({
   params,
 }: {
-  params: { city: string };
+  params: Promise<{ city: string }>;
 }) {
   const { city } = await params;
   return {
