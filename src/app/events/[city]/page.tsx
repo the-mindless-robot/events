@@ -8,6 +8,9 @@ type EventsPageProps = {
   params: {
     city: string;
   };
+  searchParams: {
+    page: string;
+  };
 };
 
 export async function generateMetadata({
@@ -24,16 +27,20 @@ export async function generateMetadata({
   };
 }
 
-export default async function EventsPage({ params }: EventsPageProps) {
+export default async function EventsPage({
+  params,
+  searchParams,
+}: EventsPageProps) {
   const { city } = await params;
+  const { page } = await searchParams;
 
   return (
     <main className="flex flex-col items-center py-24 px-[20px] min-h-[110vh]">
       <H1 className="mb-10">
         {city === "all" ? "All Events" : `Events in ${capitalize(city)}`}
       </H1>
-      <Suspense fallback={<Loading />}>
-        <EventsListDataWrapper city={city} />
+      <Suspense key={city + page} fallback={<Loading />}>
+        <EventsListDataWrapper city={city} page={page} />
       </Suspense>
     </main>
   );
